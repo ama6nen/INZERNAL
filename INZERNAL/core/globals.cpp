@@ -23,7 +23,7 @@ namespace opt {
 
 	//enhanchements 
 	float		fps_limit	= 144.0f;	//fps limit gets forced to this
-	std::string	gt_version	= "3.51";	//gt version gets spoofed to this
+	std::string	gt_version	= "3.57";	//gt version gets spoofed to this
 
 	bool		spoof_login	= true;		//whether or not to spoof mac, hash2, wk, rid, etc on login. GT version spoofed even when off.
 	bool		spoof_name	= true;		//Also set the requestedName field to random. Might be unwanted for non grow-id accounts.
