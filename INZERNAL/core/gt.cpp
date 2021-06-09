@@ -291,6 +291,11 @@ bool gt::patch_mutex() {
     return true;
 }
 
+void gt::join_world(std::string world) {
+    std::string p = "action|join_request\nname|" + world;
+    gt::send(3, p, false);
+}
+
 void gt::hit_tile(CL_Vec2i where) {
     auto local = sdk::GetGameLogic()->GetLocalPlayer();
     if (!local)
