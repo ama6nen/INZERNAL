@@ -167,6 +167,26 @@ void menu::cheats_tab() {
         local->water_speed = global::state.water_speed;
 
     ImGui::Columns(1, nullptr, false);
+    
+    if (ImGui::BeginChild("###Warp", AUTOSIZEC(2), true, ImGuiWindowFlags_MenuBar)) {
+        ImGui::BeginMenuBar();
+        ImGui::Text("Warp");
+        ImGui::EndMenuBar();
+        static char worldname[25];
+        size_t size = std::strlen(worldname);
+        ImGui::Text("World Name:");
+        ImGui::SameLine();
+        ImGui::InputText("", worldname, IM_ARRAYSIZE(worldname));
+        ImGui::SameLine();
+        if (ImGui::Button("Warp to World")) {
+            gt::join_world(worldname);
+        }
+        ImGui::SameLine();
+        ImGui::Text(" %u / 24", size);
+        ImGui::EndChild();
+        ImGui::Spacing();
+    }
+    
     ImGui::PopStyleVar();
     //dont worry bringing back instant stop and start later on without the hooks.
 }
