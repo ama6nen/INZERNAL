@@ -275,9 +275,9 @@ void __cdecl hooks::App_Update(App* app) {
     UpdateManager::Execute(app);
 }
 
-void __cdecl hooks::TileExtra_Serialize(TileExtra* te, uint8_t* mem, uint32_t* pos, bool save1, World* world, bool save2, Tile* target) {
+void __cdecl hooks::TileExtra_Serialize(TileExtra* te, uint8_t* mem, uint32_t* pos, bool save1, World* world, bool save2, Tile* target, int version) {
     static auto orig = decltype(&hooks::TileExtra_Serialize)(hookmgr->orig(sig::tileextra_serialize));
-    orig(te, mem, pos, save1, world, save2, target);
+    orig(te, mem, pos, save1, world, save2, target, version);
     if (te->type == 3 && target->tile_extra) {
         printf("\n\n[Tile access list]\nID: %d\n", target->foreground);
 
