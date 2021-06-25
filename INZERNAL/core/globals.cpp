@@ -22,7 +22,7 @@ namespace opt {
 
 	//enhanchements 
 	float		fps_limit	= 144.0f;	//fps limit gets forced to this
-	std::string	gt_version	= "3.66";	//gt version gets spoofed to this
+	std::string	gt_version	= "3.64";	//gt version gets spoofed to this
 	std::string	gt_supported= "3.61";	//the gt version for which INZERNAL was built for. Probably wont work for other versions.
 
 	bool		spoof_login	= true;		//whether or not to spoof mac, hash2, wk, rid, etc on login. GT version spoofed even when off.
