@@ -76,7 +76,7 @@ namespace hooks {
     void    __cdecl     NetHTTP_Update(NetHTTP* http);
     long    __stdcall   EndScene(IDirect3DDevice9* device);
     void    __cdecl     App_Update(App* app);
-    void    __cdecl     TileExtra_Serialize(TileExtra* te, uint8_t* mem, uint32_t* pos, bool save1, World* world, bool save2, Tile* target);
+    void    __cdecl     TileExtra_Serialize(TileExtra* te, uint8_t* mem, uint32_t* pos, bool save1, World* world, bool save2, Tile* target, int version);
     void    __cdecl     OnPunched(NetAvatar* local, CL_Vec2f pos, NetAvatar* puncher);
     float   __cdecl     GetFruitBloomProgressPercent(Tile* tile);
     bool    __cdecl     DialogIsOpened(GameLogic* logic);
