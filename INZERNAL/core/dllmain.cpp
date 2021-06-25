@@ -41,8 +41,6 @@ void on_inject() {
 
     if (!gt::patch_banbypass())
         on_exit();
-    if (!gt::patch_mutex())
-        printf("Failed in patching mutex checks, your choice if you want to still keep running.\n");
 
     hooks::init();
 
