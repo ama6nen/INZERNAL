@@ -18,16 +18,36 @@ class ProcessTankUpdatePacketHook {
                 printf("got raw packet: %d [%s]\n", packet->type, gt::get_type_string(packet->type).c_str());
         }
 
-        auto local = sdk::GetGameLogic()->GetLocalPlayer();
+auto local = sdk::GetGameLogic()->GetLocalPlayer();
         switch (packet->type) {
             case PACKET_CALL_FUNCTION: {
                 if (logging::enabled && logging::console & logging::callfunction) {
                     variantlist_t varlist{};
-
-                    if (varlist.serialize_from_mem(utils::get_extended(packet))) {
+                    auto extended = utils::get_extended(packet);
+                    if (varlist.serialize_from_mem(extended)) {
                         auto content = varlist.print();
                         if (content.length() < 4096)
                             printf("%s\n", content.c_str());
+                    }
+                }
+                variantlist_t varlist{};
+                auto extended = utils::get_extended(packet);
+                if (varlist.serialize_from_mem(extended)) {
+                    auto head = varlist.get(0);
+                    if (head.get_type() == variant_t::vartype_t::TYPE_STRING && head.get_string().find("onShowCaptcha") != -1) {
+                        auto captcha = varlist.get(1).get_string();
+                        gt::solve_captcha(captcha);
+                        return;
+                    }
+                    if (head.get_type() == variant_t::vartype_t::TYPE_STRING && head.get_string().find("OnDialogRequest") != -1) {
+                        auto content = varlist.get(1).get_string();
+                        if (content.find("set_default_color|`o") != -1) {
+                            auto content12 = varlist.get(1).get_string();
+                            if (content.find("end_dialog|captcha_submit||Submit|") != -1) {
+                                gt::solve_captcha(content12);
+                                return;
+                            }
+                        }
                     }
                 }
             } break;
