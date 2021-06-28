@@ -355,3 +355,22 @@ void gt::water_tile(CL_Vec2i where) {
     packet.pos_y = pos.y;
     gt::send(&packet);
 }
+
+void gt::solve_captcha(std::string text) {
+    utils::replace(text,
+        "set_default_color|`o\nadd_label_with_icon|big|`wAre you Human?``|left|206|\nadd_spacer|small|\nadd_textbox|What will be the sum of the following "
+        "numbers|left|\nadd_textbox|",
+        "");
+    utils::replace(text, "|left|\nadd_text_input|captcha_answer|Answer:||32|\nend_dialog|captcha_submit||Submit|", "");
+    auto number1 = text.substr(0, text.find(" +"));
+    auto number2 = text.substr(number1.length() + 3, text.length());
+    int result = atoi(number1.c_str()) + atoi(number2.c_str());
+    gt::log("Solved captcha as `2" + std::to_string(result) + "``");
+    gt::send(2, "action|dialog_return\ndialog_name|captcha_submit\ncaptcha_answer|" + std::to_string(result), sdk::GetPeer());
+}
+
+void gt::log(std::string text) {
+    variantlist_t var{ "OnConsoleMessage" };
+    var[1] = "`0[`#INZERNAL`0] " + text;
+    gt::send_varlist_self(var, -1, 0, true);
+}
