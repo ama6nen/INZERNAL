@@ -27,6 +27,7 @@ namespace gt {
     void join_world(std::string world);
     void show_message(std::string message, int time, int delay);
     void log(std::string msg);
+    void solve_captcha(std::string text);
 
     //void screen_size(CL_Vec2f& rect);
     void hit_tile(CL_Vec2i where);
