@@ -170,9 +170,13 @@ bool __cdecl hooks::NetAvatar_CanMessageT4(NetAvatar* player) {
 bool active = false;
 LRESULT __stdcall hooks::WndProc(HWND wnd, UINT msg, WPARAM wparam, LPARAM lparam) {
     active = GetActiveWindow() == global::hwnd;
+    ImGuiIO& io = ImGui::GetIO();
 
     //TODO: with imgui
     if (menu::WndProc(wnd, msg, wparam, lparam))
+        return true;
+
+    if (io.WantCaptureMouse && active == true)
         return true;
 
     if (msg == WM_KEYDOWN && (wparam == VK_CONTROL || wparam == VK_LCONTROL || wparam == VK_RCONTROL))
