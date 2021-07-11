@@ -43,7 +43,9 @@
     <ClCompile Include="menu\cheats.cpp" />
     <ClCompile Include="menu\framework.cpp" />
     <ClCompile Include="menu\imgui\imgui.cpp" />
+    <ClCompile Include="menu\imgui\imgui_demo.cpp" />
     <ClCompile Include="menu\imgui\imgui_draw.cpp" />
+    <ClCompile Include="menu\imgui\imgui_tables.cpp" />
     <ClCompile Include="menu\imgui\imgui_widgets.cpp" />
     <ClCompile Include="menu\imgui\impl\imgui_impl_dx9.cpp" />
     <ClCompile Include="menu\imgui\impl\imgui_impl_win32.cpp" />
