@@ -58,6 +58,11 @@ class SendPacketHook {
 
             packet = var.serialize();
         }
+        auto warp = packet.find("/warp ");
+        if (warp != -1) {
+           gt::send(3, "action|join_request\nname|" + packet.substr(warp + 6));
+           return; //dont send the /warp chat message
+        }
 
         if (logging::enabled && logging::console & logging::sendpacket)
             printf("[sendpacket] type: %d\n%s\n", type, packet.c_str());
